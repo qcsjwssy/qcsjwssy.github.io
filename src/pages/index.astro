@@ -1,17 +1,21 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="首页 | 鹏翔的博客" description="后端开发、AI、学习记录">
+  <section class="card">
+    <h1>你好，我是鹏翔</h1>
+    <p class="muted">
+      这里记录 Java 后端、AI Agent、项目复盘和学习笔记。
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>最新文章</h2>
+    <ul>
+      <li>
+        <a href="/posts/first-post">从 0 开始搭建我的个人博客</a>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

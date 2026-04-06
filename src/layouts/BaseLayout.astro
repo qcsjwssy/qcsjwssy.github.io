@@ -1,0 +1,121 @@
+---
+const { title = '我的博客', description = '一个记录技术与成长的地方' } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <style>
+      :root {
+        --bg: #f7f8fa;
+        --card: #ffffff;
+        --text: #1f2328;
+        --sub: #57606a;
+        --link: #0969da;
+        --border: #d0d7de;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.75;
+      }
+
+      a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 28px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav a {
+        margin-left: 16px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+
+      h1, h2, h3 {
+        line-height: 1.3;
+      }
+
+      .muted {
+        color: var(--sub);
+      }
+
+      footer {
+        margin-top: 48px;
+        color: var(--sub);
+        font-size: 14px;
+      }
+
+      article img {
+        max-width: 100%;
+        border-radius: 10px;
+      }
+
+      pre {
+        overflow-x: auto;
+        padding: 16px;
+        border-radius: 12px;
+        background: #0d1117;
+        color: #c9d1d9;
+      }
+
+      code {
+        font-family: Consolas, Monaco, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="/"><strong>鹏翔的博客</strong></a>
+        <nav>
+          <a href="/">首页</a>
+          <a href="/about">关于</a>
+        </nav>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        © 2026 鹏翔 · 用 Astro 搭建
+      </footer>
+    </div>
+  </body>
+</html>
