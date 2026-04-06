@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  console.log('blog ids:', posts.map((post) => post.id));
+
+  return posts.map((post) => ({
+    params: {
+      slug: post.id,
+    },
+    props: {
+      post,
+    },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={`${post.data.title} | 鹏翔的博客`} description={post.data.description}>
+  <article class="card">
+    <h1>{post.data.title}</h1>
+    <p class="muted">
+      发布于：{post.data.pubDate.toLocaleDateString('zh-CN')}
+    </p>
+
+    {post.data.tags.length > 0 && (
+      <p class="muted">
+        标签：{post.data.tags.join(' / ')}
+      </p>
+    )}
+
+    <Content />
+  </article>
+</BaseLayout>

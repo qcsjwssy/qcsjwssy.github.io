@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
 <BaseLayout title="首页 | 鹏翔的博客" description="后端开发、AI、学习记录">
@@ -12,10 +16,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <section class="card">
     <h2>最新文章</h2>
-    <ul>
-      <li>
-        <a href="/posts/first-post">从 0 开始搭建我的个人博客</a>
-      </li>
-    </ul>
+
+    {posts.length === 0 ? (
+      <p class="muted">还没有文章，先去写第一篇吧。</p>
+    ) : (
+      <ul>
+        {posts.map((post) => (
+          <li style="margin-bottom: 16px;">
+            <a href={`/posts/${post.id}`}>
+              <strong>{post.data.title}</strong>
+            </a>
+            <div class="muted">{post.data.description}</div>
+            <div class="muted">
+              {post.data.pubDate.toLocaleDateString('zh-CN')}
+            </div>
+          </li>
+        ))}
+      </ul>
+    )}
   </section>
 </BaseLayout>
